@@ -1,0 +1,15 @@
+services:
+  litellm:
+    build:
+      context: .
+      args:
+        - UBUNTU_VERSION_NAME=${UBUNTU_VERSION_NAME:-latest} # ubuntu code name
+    image: github.com/hyper-w/litellm-containers/litellm
+    container_name: litellm
+    ports:
+      - "4000:4000"
+    environment:
+        - GITHUB_API_KEY=${GITHUB_API_KEY} # If you want to use GitHub API, you need.
+        - OPENAI_API_KEY=${OPENAI_API_KEY} # If you want to use OpenAPI, you need.
+        - AI_Model=${AI_Model:-github/gpt-4o} # Select Your AI Model
+    restart: always
